@@ -24,9 +24,13 @@
     "url": "git+https://github.com/kosich/rxjs-stt.git"
   },
   "keywords": [
-    "redux",
+    "speech-to-text",
+    "speech recognition",
+    "Web Speech API",
+    "s2t",
     "rxjs",
-    "state"
+    "javascript",
+    "typescript"
   ],
   "author": "Kostiantyn Palchyk",
   "license": "MIT",
