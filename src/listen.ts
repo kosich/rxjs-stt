@@ -1,5 +1,5 @@
 import { fromEvent, merge, Observable, throwError, timer, Observer } from 'rxjs';
-import { mergeMap, mergeMapTo, takeUntil } from 'rxjs/operators';
+import { mergeMap, mergeMapTo, takeUntil, delay } from 'rxjs/operators';
 import { SpeechRecognition } from './gapi';
 
 export interface SpeechRecognitionConfig {
@@ -37,9 +37,6 @@ export function listen(value: SpeechRecognition | SpeechRecognitionConfig = {}) 
         const nomatch$ = fromEvent(recognition, 'nomatch') as Observable<SpeechRecognitionEvent>;
         const result$ = fromEvent(recognition, 'result') as Observable<SpeechRecognitionEvent>;
 
-        // end -- completes Observable
-        const end$ = fromEvent(recognition, 'end');
-
         // audio, sound and speech recognition marks
         const audiostart$ = fromEvent(recognition, 'audiostart');
         const audioend$ = fromEvent(recognition, 'audioend');
@@ -47,6 +44,9 @@ export function listen(value: SpeechRecognition | SpeechRecognitionConfig = {}) 
         const soundend$ = fromEvent(recognition, 'soundend');
         const speechstart$ = fromEvent(recognition, 'speechstart');
         const speechend$ = fromEvent(recognition, 'speechend');
+
+        // end -- completes Observable
+        const end$ = fromEvent(recognition, 'end');
 
         // start listening to events
         const subscription = merge(
@@ -61,7 +61,12 @@ export function listen(value: SpeechRecognition | SpeechRecognitionConfig = {}) 
             error$,
         )
             .pipe(
-                takeUntil(end$)
+                takeUntil(
+                    // delay fix for FF:
+                    // it seem to fire 'end' event BEFORE the 'result'
+                    // (tested on: 78.0.2 (64-bit) MacOS, w/ recognise.enabled + force_enabled)
+                    end$.pipe( delay(1) )
+                )
             )
             .subscribe(observer);
 

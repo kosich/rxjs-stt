@@ -1,6 +1,6 @@
 {
   "name": "rxjs-stt",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "RxJS speech recognition wrapper",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
