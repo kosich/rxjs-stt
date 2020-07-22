@@ -1,7 +1,7 @@
 # RxJS wrapper for speech recognition Web API
 
 ```
-npm i rxjs-tts
+npm i rxjs-stt
 ```
 
 Try it online: https://stackblitz.com/edit/rxjs-stt?file=index.ts
