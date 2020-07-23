@@ -17,13 +17,13 @@
 
 A RxJS wrapper around browser native [SpeechRecognition](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition)
 
+Try it [**online**](https://stackblitz.com/edit/rxjs-stt?file=index.ts)
+
 ## Install
 
 ```
 npm i rxjs-stt
 ```
-
-Try it [**online**](https://stackblitz.com/edit/rxjs-stt?file=index.ts)
 
 
 ## Use
@@ -38,3 +38,4 @@ listen({ lang: 'en' }).subscribe(e => {
 });
 ```
 
+## Enjoy 🙂
